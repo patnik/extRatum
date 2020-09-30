@@ -18,8 +18,8 @@ point_class <- function(point_data,
                         crs,
                         total_points = TRUE) {
   # assume that the attribute is constant throughout the geometry
-  st_agr(point_data) = "constant"
-  st_agr(higher_geo_lay) = "constant"
+  sf::st_agr(point_data) = "constant"
+  sf::st_agr(higher_geo_lay) = "constant"
 
   # we need a crs that is planar
   crs = crs
@@ -29,7 +29,7 @@ point_class <- function(point_data,
 
   # find points within polygons
   points_in_grids <-
-    sf::st_join(point_data, higher_geo_lay, join = st_within)
+    sf::st_join(point_data, higher_geo_lay, join = sf::st_within)
 
   # remove points that are outside the grid boundaries to avoid getting errors
   points_in_grids <- points_in_grids %>%

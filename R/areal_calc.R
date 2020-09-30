@@ -30,8 +30,8 @@ areal_calc <- function(polygon_layer,
     as.numeric(higher_geo_lay$tot_area_sqkm)
 
   # assume that the attribute is constant throughout the geometry
-  st_agr(polygon_layer) = "constant"
-  st_agr(higher_geo_lay) = "constant"
+  sf::st_agr(polygon_layer) = "constant"
+  sf::st_agr(higher_geo_lay) = "constant"
 
 
   #run the intersect function, converting the output to a tibble in the process

@@ -8,7 +8,7 @@
 A geospatial file of ten points georeferenced in OSGB 1936.
 }
 \source{
-\item{own dataset}
+Own dataset.
 }
 \usage{
 points

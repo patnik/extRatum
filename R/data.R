@@ -4,7 +4,7 @@
 #'
 #' @format A geospatial file of three polygons georeferenced in OSGB 1936.
 #'
-#' @source \item{own dataset}
+#' @source Own dataset.
 "pol_large"
 
 #' @title Small polygons geospatial layer.
@@ -13,7 +13,7 @@
 #'
 #' @format A geospatial file of eight polygons georeferenced in OSGB 1936.
 #'
-#' @source \item{own dataset}
+#' @source Own dataset.
 "pol_small"
 
 #' @title Line geospatial layer.
@@ -22,7 +22,7 @@
 #'
 #' @format A geospatial file of six lines georeferenced in OSGB 1936.
 #'
-#' @source \item{own dataset}
+#' @source Own dataset.
 "lines"
 
 #' @title Point geospatial layer.
@@ -31,5 +31,5 @@
 #'
 #' @format A geospatial file of ten points georeferenced in OSGB 1936.
 #'
-#' @source \item{own dataset}
+#' @source Own dataset.
 "points"

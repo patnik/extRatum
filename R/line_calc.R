@@ -20,8 +20,8 @@ line_calc <- function(line_layer,
   higher_geo_lay <- sf::st_transform(higher_geo_lay, crs)
 
   # assume that the attribute is constant throughout the geometry
-  st_agr(line_layer) = "constant"
-  st_agr(higher_geo_lay) = "constant"
+  sf::st_agr(line_layer) = "constant"
+  sf::st_agr(higher_geo_lay) = "constant"
 
   #run the intersect function, converting the output to a tibble in the process
   int <- dplyr::as_tibble(sf::st_intersection(line_layer, higher_geo_lay))
