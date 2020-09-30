@@ -1,4 +1,6 @@
-#' Title
+#' Areal data calculation
+#'
+#' Calculates the area covered by
 #'
 #' @param polygon_layer
 #' @param higher_geo_lay

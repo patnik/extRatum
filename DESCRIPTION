@@ -17,4 +17,5 @@ Date/Publication: 2020-09-30 08:57:53 UTC
 Imports: 
     sf (>= 0.9.5),
     dplyr (>= 1.0.0),
-    tidyr (>= 1.1.0)
+    tidyr (>= 1.1.0),
+    rgdal (>= 1.5.12)

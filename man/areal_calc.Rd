@@ -2,7 +2,7 @@
 % Please edit documentation in R/areal_calc.R
 \name{areal_calc}
 \alias{areal_calc}
-\title{Title}
+\title{Areal data calculation}
 \usage{
 areal_calc(polygon_layer, higher_geo_lay, unique_id_code, crs)
 }
@@ -13,5 +13,5 @@ areal_calc(polygon_layer, higher_geo_lay, unique_id_code, crs)
 
 }
 \description{
-Title
+Calculates the area covered by
 }
