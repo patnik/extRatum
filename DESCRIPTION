@@ -1,0 +1,20 @@
+Package: BEI
+Title: Built Environment Indicators
+Version: 0.0.0.9000
+Authors@R: c(
+	person("Nikos", "Patias", email = "n.patias@liverpool.ac.uk", role = c("aut","cre"), comment = c(ORCID = "0000-0002-6542-2330")),
+	person("Francisco", "Rowe", email = "fcorowe@liverpool.ac.uk", role = ("aut"))
+	)
+Description: The purpose of this package is to summarise the presence of built environment characteristics in larger geographic areas.
+	The built environment characteristcs can be of all types of geospatial data (i.e. point, polygons or lines).    
+License: MIT + file LICENSE
+Depends: R (>= 4.2.0)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Date/Publication: 2020-09-30 08:57:53 UTC
+Imports: 
+    sf (>= 0.9.5),
+    dplyr (>= 1.0.0),
+    tidyr (>= 1.1.0)
