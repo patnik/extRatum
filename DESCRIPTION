@@ -8,7 +8,7 @@ Authors@R: c(
 Description: The purpose of this package is to summarise the presence of built environment characteristics in larger geographic areas.
 	The built environment characteristcs can be of all types of geospatial data (i.e. point, polygons or lines).    
 License: MIT + file LICENSE
-Depends: R (>= 4.2.0)
+Depends: R (>= 4.0.2)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

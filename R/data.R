@@ -1,0 +1,35 @@
+#' @title Large polygons geospatial layer.
+#'
+#' @description Toy dataset of polygon data.
+#'
+#' @format A geospatial file of three polygons georeferenced in OSGB 1936.
+#'
+#' @source \item{own dataset}
+"pol_large"
+
+#' @title Small polygons geospatial layer.
+#'
+#' @description Toy dataset of polygon data.
+#'
+#' @format A geospatial file of eight polygons georeferenced in OSGB 1936.
+#'
+#' @source \item{own dataset}
+"pol_small"
+
+#' @title Line geospatial layer.
+#'
+#' @description Toy dataset of line data.
+#'
+#' @format A geospatial file of six lines georeferenced in OSGB 1936.
+#'
+#' @source \item{own dataset}
+"lines"
+
+#' @title Point geospatial layer.
+#'
+#' @description Toy dataset of point data.
+#'
+#' @format A geospatial file of ten points georeferenced in OSGB 1936.
+#'
+#' @source \item{own dataset}
+"points"
