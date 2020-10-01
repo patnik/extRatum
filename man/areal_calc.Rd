@@ -7,11 +7,22 @@
 areal_calc(polygon_layer, higher_geo_lay, unique_id_code, crs)
 }
 \arguments{
-\item{crs}{}
+\item{polygon_layer}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}}
+
+\item{higher_geo_lay}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}}
+
+\item{unique_id_code}{a string, indicating the unique ID column of \code{higher_geo_lay} in which
+we want to summarise the data}
+
+\item{crs}{coordinate reference system: integer with the EPSG code, or character with proj4string}
 }
 \value{
-
+a \code{tibble} data frame object
 }
 \description{
 Calculates the area covered by
+}
+\examples{
+
+
 }

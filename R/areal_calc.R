@@ -2,15 +2,22 @@
 #'
 #' Calculates the area covered by
 #'
-#' @param polygon_layer
-#' @param higher_geo_lay
-#' @param unique_id_code
-#' @param crs
+#' @param polygon_layer multipologon object of class \code{sf}, \code{sfc} or \code{sfg}
 #'
-#' @return
-#' @export
+#' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}
+#'
+#' @param unique_id_code a string, indicating the unique ID column of \code{higher_geo_lay} in which
+#' we want to summarise the data
+#'
+#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string
+#'
+#' @return a \code{tibble} data frame object
 #'
 #' @examples
+#'
+#'
+#' @export
+
 areal_calc <- function(polygon_layer,
                        higher_geo_lay,
                        unique_id_code,
