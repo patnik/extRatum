@@ -2,4 +2,5 @@
 
 export(areal_calc)
 export(line_calc)
-export(point_class)
+export(point_calc)
+importFrom(dplyr,"%>%")

@@ -5,7 +5,7 @@
 \alias{lines}
 \title{Line geospatial layer.}
 \format{
-A geospatial file of six lines georeferenced in OSGB 1936.
+A geospatial file of six lines georeferenced in wgs84.
 }
 \source{
 Own dataset.

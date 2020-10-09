@@ -5,7 +5,7 @@
 \alias{pol_large}
 \title{Large polygons geospatial layer.}
 \format{
-A geospatial file of three polygons georeferenced in OSGB 1936.
+A geospatial file of three polygons georeferenced in wgs84.
 }
 \source{
 Own dataset.

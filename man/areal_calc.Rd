@@ -7,22 +7,38 @@
 areal_calc(polygon_layer, higher_geo_lay, unique_id_code, crs)
 }
 \arguments{
-\item{polygon_layer}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}}
+\item{polygon_layer}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.}
 
-\item{higher_geo_lay}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}}
+\item{higher_geo_lay}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.}
 
-\item{unique_id_code}{a string, indicating the unique ID column of \code{higher_geo_lay} in which
-we want to summarise the data}
+\item{unique_id_code}{a string; indicating the unique ID column of \code{higher_geo_lay}, in which
+we want to summarise the data.}
 
-\item{crs}{coordinate reference system: integer with the EPSG code, or character with proj4string}
+\item{crs}{coordinate reference system: integer with the EPSG code, or character with proj4string.}
 }
 \value{
-a \code{tibble} data frame object
+a \code{tibble} data frame object containing three columns:
+the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
+in \code{higher_geo_lay} (Tot_area_sqkm), the total area covered by \code{polygon_layer} features (AreaCovered),
+and the ratio between the total area covered by \code{polygon_layer} and the the total area of
+\code{higher_geo_lay} polygon (Ratio).
 }
 \description{
-Calculates the area covered by
+Calculates the area covered by a multipologon object within a set of polygons, as well as the
+the ratio between the area covered by its features and the total area of a higher geography polygon.
 }
 \examples{
+# Run the areal_calc() function using the toy datasets provided by the package.
+# The datasets are georeferenced in wgs84. However, we need a planar system to measure areas.
+# In this case, the polygons are in the UK so we use the British National Grid.
+outcome <- areal_calc(
+ polygon_layer = pol_small,
+ higher_geo_lay = pol_large,
+ unique_id_code = "large_pol_",
+ crs = "epsg:27700")
+
+ # print the outcome
+ outcome
 
 
 }

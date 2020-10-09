@@ -5,7 +5,7 @@
 \alias{points}
 \title{Point geospatial layer.}
 \format{
-A geospatial file of ten points georeferenced in OSGB 1936.
+A geospatial file of ten points georeferenced in wgs84.
 }
 \source{
 Own dataset.

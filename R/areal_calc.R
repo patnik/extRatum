@@ -1,20 +1,38 @@
 #' Areal data calculation
 #'
-#' Calculates the area covered by
+#' Calculates the area covered by a multipologon object within a set of polygons, as well as the
+#' the ratio between the area covered by its features and the total area of a higher geography polygon.
 #'
-#' @param polygon_layer multipologon object of class \code{sf}, \code{sfc} or \code{sfg}
+#' @param polygon_layer multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}
+#' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string, indicating the unique ID column of \code{higher_geo_lay} in which
-#' we want to summarise the data
+#' @param unique_id_code a string; indicating the unique ID column of \code{higher_geo_lay}, in which
+#' we want to summarise the data.
 #'
-#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string
+#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string.
 #'
-#' @return a \code{tibble} data frame object
+#' @return a \code{tibble} data frame object containing three columns:
+#' the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
+#' in \code{higher_geo_lay} (Tot_area_sqkm), the total area covered by \code{polygon_layer} features (AreaCovered),
+#' and the ratio between the total area covered by \code{polygon_layer} and the the total area of
+#' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
+#' # Run the areal_calc() function using the toy datasets provided by the package.
+#' # The datasets are georeferenced in wgs84. However, we need a planar system to measure areas.
+#' # In this case, the polygons are in the UK so we use the British National Grid.
+#' outcome <- areal_calc(
+#'  polygon_layer = pol_small,
+#'  higher_geo_lay = pol_large,
+#'  unique_id_code = "large_pol_",
+#'  crs = "epsg:27700")
 #'
+#'  # print the outcome
+#'  outcome
+#'
+#'
+#' @importFrom dplyr "%>%"
 #'
 #' @export
 
@@ -30,13 +48,13 @@ areal_calc <- function(polygon_layer,
   polygon_layer <- sf::st_transform(polygon_layer, crs)
   higher_geo_lay <- sf::st_transform(higher_geo_lay, crs)
 
-  #### 1st step
-  # calculate total area of grids
-  higher_geo_lay$tot_area_sqkm <-
+
+  # calculate total area of the higher geography layer
+  higher_geo_lay$Tot_area_sqkm <-
     sf::st_area(higher_geo_lay$geometry) / 1000000
-  # convert area of grids to numeric too
-  higher_geo_lay$tot_area_sqkm <-
-    as.numeric(higher_geo_lay$tot_area_sqkm)
+  # convert area of the higher geography layer to numeric too
+  higher_geo_lay$Tot_area_sqkm <-
+    as.numeric(higher_geo_lay$Tot_area_sqkm)
 
   # assume that the attribute is constant throughout the geometry
   sf::st_agr(polygon_layer) = "constant"
@@ -60,8 +78,13 @@ areal_calc <- function(polygon_layer,
     dplyr::summarise(AreaCovered = sum(area_sqkm), .groups = 'drop_last')
 
 
+  # to calculate the ratio of area covered by the total area of the higher geography layer
+  combined_data <- dplyr::left_join(CoverByGeo, higher_geo_lay, by = unique_id_code)
+  combined_data$Ratio <- combined_data$AreaCovered / combined_data$Tot_area_sqkm
 
-  results <- CoverByGeo
+
+
+  results <- combined_data[,c(unique_id_code, "Tot_area_sqkm", "AreaCovered", "Ratio")]
   return(results)
 
 }

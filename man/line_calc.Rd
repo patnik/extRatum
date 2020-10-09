@@ -2,16 +2,43 @@
 % Please edit documentation in R/line_calc.R
 \name{line_calc}
 \alias{line_calc}
-\title{Title}
+\title{Line data calculation}
 \usage{
 line_calc(line_layer, higher_geo_lay, unique_id_code, crs)
 }
 \arguments{
-\item{crs}{}
+\item{line_layer}{multilinestring object of class \code{sf}, \code{sfc} or \code{sfg}.}
+
+\item{higher_geo_lay}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.}
+
+\item{unique_id_code}{a string; indicating the unique ID column of \code{higher_geo_lay}, in which
+we want to summarise the data.}
+
+\item{crs}{coordinate reference system: integer with the EPSG code, or character with proj4string.}
 }
 \value{
-
+a \code{tibble} data frame object containing three columns:
+the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
+in \code{higher_geo_lay} (Tot_area_sqkm), the total length of \code{line_layer} features (TotalLength),
+and the ratio between the total length of \code{line_layer} and the the total area of
+\code{higher_geo_lay} polygon (Ratio).
 }
 \description{
-Title
+Calculates the total length of a multilinestring object within a set of polygons, as well as the
+the ratio between the total length and the total area of a higher geography polygon.
+}
+\examples{
+# Run the line_calc() function using the toy datasets provided by the package.
+# The datasets are georeferenced in wgs84.
+# However, we need a planar system to measure line lengths and areas.
+# In this case, the lines and polygons are in the UK so we use the British National Grid.
+outcome <- line_calc(
+ line_layer = lines,
+ higher_geo_lay = pol_large,
+ unique_id_code = "large_pol_",
+ crs = "epsg:27700")
+
+ # print the outcome
+ outcome
+
 }

@@ -1,3 +1,3 @@
-pol_small <- sf::st_read("data-raw/polygons_small.shp")
+pol_small <- sf::st_read("data-raw/pol_small.shp")
 
 
