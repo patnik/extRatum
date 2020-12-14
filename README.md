@@ -1,5 +1,5 @@
 
-<img align="centre" src="sticker.png" width="200">
+<img align="center" src="sticker.png" width="200">
 
 ## Overview
 
