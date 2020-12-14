@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="200" height="200" src="sticker.png">
+  <img width="200" src="sticker.png">
 </p>
 
 ## Overview
@@ -12,7 +12,7 @@ extRatum is a package which summarises the presence of geospatial features in la
 The easiest way to get extRatum is to install it from CRAN:
 
 ```{r, eval = FALSE}
-#install.packages("extRatum")
+install.packages("extRatum")
 ```
 
 ### Development version
@@ -22,7 +22,7 @@ the development version of extRatum from GitHub.
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-#devtools::install_github("patnik/extRatum")
+devtools::install_github("patnik/extRatum")
 ```
 
 ## Usage
