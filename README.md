@@ -1,3 +1,6 @@
+
+![sticker](sticker.png)
+
 ## Overview
 
 extRatum is a package which summarises the presence of geospatial features in larger geographic areas. It does so by calculating the area covered by a geospatial feature (i.e. buildings, parks, lakes, etc.). The geospatial features can be of all types of geospatial data (i.e. point, polygons or lines).
