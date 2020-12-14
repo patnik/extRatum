@@ -1,6 +1,7 @@
 
 <p align="center">
   <img width="250" src="sticker.png">
+  <img width="250" src="sticker2.png">
 </p>
 
 ## Overview
