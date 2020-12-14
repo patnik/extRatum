@@ -1,5 +1,5 @@
 
-![sticker](sticker.png)
+<img align="centre" src="sticker.png" width="200">
 
 ## Overview
 
