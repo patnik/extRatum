@@ -1,5 +1,7 @@
 
-<img align="center" src="sticker.png" width="200">
+<p align="center">
+  <img width="200" height="200" src="sticker.png">
+</p>
 
 ## Overview
 
@@ -25,5 +27,6 @@ the development version of extRatum from GitHub.
 
 ## Usage
 
+Following this [link](https://github.com/patnik/extRatum_examples) you can access two example notebooks that deonstrate the package usage.
 
 
