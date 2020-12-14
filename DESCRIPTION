@@ -5,9 +5,9 @@ Authors@R: c(
 	person("Nikos", "Patias", email = "n.patias@liverpool.ac.uk", role = c("aut","cre"), comment = c(ORCID = "0000-0002-6542-2330")),
 	person("Francisco", "Rowe", email = "fcorowe@liverpool.ac.uk", role = ("aut"))
 	)
-Description: The purpose of this package is to summarise the presence of built environment features in larger geographic areas. 
-	It does so by calculating the area covered by built environment feature (i.e. buildings). 
-	The built environment features can be of all types of geospatial data (i.e. point, polygons or lines).
+Description: The purpose of this package is to summarise the presence of geospatial features in larger geographic areas. 
+	It does so by calculating the area covered by a geospatial feature (i.e. buildings, parks, lakes, etc.). 
+	The geospatial features can be of all types of geospatial data (i.e. point, polygons or lines).
 License: MIT + file LICENSE
 Depends: R (>= 4.0.0)
 Encoding: UTF-8

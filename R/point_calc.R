@@ -147,8 +147,10 @@ point_calc <- function(point_data,
     points_ratio <- combined_data %>%
       dplyr::mutate(Ratio = NoPoints  / Tot_area_sqkm)
 
+    points_ratio <- points_ratio[,c(unique_id_code, "Tot_area_sqkm", class_col, "NoPoints", "Ratio")]
+
     # create a subset with the columns needed
-    points_ratio_subset <- points_ratio[, c(1:2,5)]
+    points_ratio_subset <- points_ratio[, c(1,3,5)]
 
     points_ratio_wide <- tidyr::spread(points_ratio_subset, 2, 3)
 
