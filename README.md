@@ -30,6 +30,6 @@ devtools::install_github("patnik/extRatum")
 
 ## Usage
 
-Following this [link](https://github.com/patnik/extRatum_examples) you can access two example notebooks that deonstrate the package usage.
+Following this [link](https://github.com/patnik/extRatum_examples) you can access two example notebooks that demonstrate functionalities of the package.
 
 
