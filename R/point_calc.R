@@ -1,12 +1,12 @@
 #' Point data calculation
 #'
-#' Computes three different summary statistics: 
-#' (1) `TotalArea` total area of each polygon; 
-#' (2) `NoPoints` number of multipoint objects within a given polygon; and, 
+#' Computes three different summary statistics:
+#' (1) `TotalArea` total area of each polygon;
+#' (2) `NoPoints` number of multipoint objects within a given polygon; and,
 #' (3) `Ratio` ratio between `NoPoints` and `TotalArea` covered within a polygon.
-#' 
+#'
 #' The function requires two sets of data: a layer of geographic polygons, and a layer of points
-#' 
+#'
 #' If points have been categorised into classes, the function can return the same summary
 #' measures for each class if `total_points` = `FALSE` by specifying the column that contains the classification in `class_col`
 #'
@@ -14,7 +14,7 @@
 #'
 #' @param higher_geo_lay multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay},
 #' used as the summary areas.
 #'
 #' @param class_col a string; indicating a column name for \code{point_data} containing
@@ -27,15 +27,15 @@
 #'
 #' @return if \code{total_points = TRUE}:
 #' A \code{tibble} data frame objects containing four columns is returned:
-#' 
+#'
 #' - the \code{unique_id_code} of \code{higher_geo_lay}
-#'  
+#'
 #' - the total area of each polygon
 #' in \code{higher_geo_lay} (TotalArea)
-#' 
+#'
 #' - the total number of point features \code{point_data} (NoPoints),
-#' and 
-#' 
+#' and
+#'
 #' - the ratio between the total number of point features \code{point_data} and the the total area of
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
@@ -58,7 +58,8 @@
 #' @examples
 #' # Run point_calc() using the packages' dummy data sets.
 #' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-#' # For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
+#' # For the examples provided here, points and polygons relate to the United Kingdom.
+#' # So the British National Grid is used.
 #'
 #' # This example returns the total points count and ratio
 #' outcome1 <- point_calc(

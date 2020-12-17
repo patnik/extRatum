@@ -1,9 +1,9 @@
 #' Areal data calculation
 #'
-#' Computes three different summary statistics: 
+#' Computes three different summary statistics:
 #' (1) `TotalArea` total area of each polygon;
 #' (2) `AreaCovered` area covered by a multipolygon object within a high order polygon; and,
-#' (3) `Ratio` ratio between `AreaCovered` and `TotalArea` i.e. 
+#' (3) `Ratio` ratio between `AreaCovered` and `TotalArea` i.e.
 #' ratio between an area covered by a given set of features and total area of a higher-order geography polygon.
 #'
 #' The function requires two sets of polygon data: high-order and low-order geographic polygons
@@ -12,27 +12,28 @@
 #'
 #' @param higher_geo_lay multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay},
 #' used as the summary areas.
 #'
 #' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
 #'
 #' @return a \code{tibble} data frame object containing four columns is returned:
-#' 
+#'
 #' - the \code{unique_id_code} of \code{higher_geo_lay}
 #'
 #' - the total area of each polygon
-#' in \code{higher_geo_lay} (TotalArea), 
-#' 
+#' in \code{higher_geo_lay} (TotalArea),
+#'
 #' - the total area covered by \code{polygon_layer} features (AreaCovered),
-#' 
+#'
 #' - the ratio between the total area covered by \code{polygon_layer} and total area of
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
 #' # Run areal_calc() using the packages' dummy data sets.
 #' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-#' # For the examples provided here, polygons relate to the United Kingdom so the British National Grid is used.
+#' # For the examples provided here, points and polygons relate to the United Kingdom.
+#' # So the British National Grid is used.
 #' outcome <- areal_calc(
 #'  polygon_layer = pol_small,
 #'  higher_geo_lay = pol_large,

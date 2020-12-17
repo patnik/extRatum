@@ -3,25 +3,25 @@
 #' Computes three different summary statistics:
 #' (1) `TotalArea` total area of each polygon;
 #' (2) `TotalLength` total length of a multilinestring object within a polygon
-#' (3) `Ratio` ratio between `TotalLength` and `TotalArea` i.e. 
+#' (3) `Ratio` ratio between `TotalLength` and `TotalArea` i.e.
 #' the ratio between the total length and total area of a higher-order geography polygon.
 #'
 #' @param line_layer multilinestring object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
 #' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay},
 #' used as the summary areas.
 #'
 #' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
 #'
 #' @return a \code{tibble} data frame object containing four columns:
-#' 
+#'
 #' the \code{unique_id_code} of \code{higher_geo_lay}
-#' 
+#'
 #' the total area of each polygon
 #' in \code{higher_geo_lay} (TotalArea)
-#' 
+#'
 #' the total length of \code{line_layer} features (TotalLength)
 #'
 #' the ratio between the total length of \code{line_layer} and the the total area of
@@ -30,7 +30,9 @@
 #' @examples
 #' # Run line_calc() using the packages' dummy data sets.
 #' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-#' # For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
+#' # For the examples provided here, points and polygons relate to the United Kingdom.
+#' # So the British National Grid is used.
+#'
 #' outcome <- line_calc(
 #'  line_layer = lines,
 #'  higher_geo_lay = pol_large,

@@ -1,1 +1,1 @@
-utils::globalVariables(c("area_sqkm", "foot_len", "NoPoints", "Tot_area_sqkm"))
+utils::globalVariables(c("area", "foot_len", "NoPoints", "TotalArea"))

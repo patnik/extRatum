@@ -39,7 +39,9 @@ the ratio between the total length and total area of a higher-order geography po
 \examples{
 # Run line_calc() using the packages' dummy data sets.
 # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-# For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
+# For the examples provided here, points and polygons relate to the United Kingdom.
+# So the British National Grid is used.
+
 outcome <- line_calc(
  line_layer = lines,
  higher_geo_lay = pol_large,

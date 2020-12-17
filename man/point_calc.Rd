@@ -71,7 +71,8 @@ measures for each class if \code{total_points} = \code{FALSE} by specifying the 
 \examples{
 # Run point_calc() using the packages' dummy data sets.
 # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-# For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
+# For the examples provided here, points and polygons relate to the United Kingdom.
+# So the British National Grid is used.
 
 # This example returns the total points count and ratio
 outcome1 <- point_calc(
