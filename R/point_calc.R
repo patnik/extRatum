@@ -8,7 +8,7 @@
 #' The function requires two sets of data: a layer of geographic polygons, and a layer of points
 #' 
 #' If points have been categorised into classes, the function can return the same summary
-#' measures for each class if `total_points` = `TRUE` by specifying the column that contains the classification in `class_col`
+#' measures for each class if `total_points` = `FALSE` by specifying the column that contains the classification in `class_col`
 #'
 #' @param point_data multipoint object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'

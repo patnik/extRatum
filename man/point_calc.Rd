@@ -66,7 +66,7 @@ Computes three different summary statistics:
 The function requires two sets of data: a layer of geographic polygons, and a layer of points
 
 If points have been categorised into classes, the function can return the same summary
-measures for each class if \code{total_points} = \code{TRUE} by specifying the column that contains the classification in \code{class_col}
+measures for each class if \code{total_points} = \code{FALSE} by specifying the column that contains the classification in \code{class_col}
 }
 \examples{
 # Run point_calc() using the packages' dummy data sets.
