@@ -1,34 +1,44 @@
 #' Point data calculation
 #'
-#' Calculates the number of a multipoint object within a set of polygons, as well as the
-#' the ratio between the number of points and the total area of a higher geography polygon.
-#' If there is a clasification of the points, this function is able to return the same summary
-#' measures for each class.
+#' Computes three different summary statistics: (1) total area of each polygon; (2) number of multipoint objects within a given polygon; and, (3)
+#' ratio between the number of points and total area covered within a polygon.
+#' 
+#' The function requires two sets of data: a layer of geographic polygons, and a layer of points
+#' 
+#' If points have been categorised into classes, the function can return the same summary
+#' measures for each class if `class_col` = `TRUE`
 #'
 #' @param point_data multipoint object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
 #' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating the unique ID column of \code{higher_geo_lay}, in which
-#' we want to summarise the data.
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' used as the summary areas.
 #'
-#' @param class_col a string; indicating the column name of \code{point_data} that contains
-#' information on the classification of points. It is used when \code{total_points = FALSE}.
+#' @param class_col a string; indicating a column name for \code{point_data} containing
+#' information on a target point classification. This is used when \code{total_points = FALSE}.
 #'
-#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string.
+#' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
 #'
-#' @param total_points logical; do we want to measure the total number of points? if set to \code{FALSE} it returns the
-#' functio results by each point class; if missing, defaults to \code{TRUE}.
+#' @param total_points logical; if the target is to measure the total number of points, set to \code{FALSE}, it returns the
+#' total number of points by class. If missing, it defaults to \code{TRUE}.
 #'
 #' @return if \code{total_points = TRUE}:
-#' A \code{tibble} data frame objects containing three columns:
-#' the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm), the total number of point features \code{point_data} (NoPoints),
-#' and the ratio between the total number of point features \code{point_data} and the the total area of
+#' A \code{tibble} data frame objects containing four columns is returned:
+#' 
+#' - the \code{unique_id_code} of \code{higher_geo_lay}
+#'  
+#' - the total area of each polygon
+#' in \code{higher_geo_lay} (Tot_area_sqkm)
+#' 
+#' - the total number of point features \code{point_data} (NoPoints),
+#' and 
+#' 
+#' - the ratio between the total number of point features \code{point_data} and the the total area of
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' if \code{total_points = FALSE}:
-#' A list of three \code{tibble} data frame objects.
+#' A list of three \code{tibble} data frame objects is returned.
 #'
 #' - The object \code{PointsLong} contains three columns:
 #' the \code{unique_id_code} of \code{higher_geo_lay}, the \code{class_col} of \code{point_data},
@@ -44,11 +54,11 @@
 #'
 #'
 #' @examples
-#' # Run the point_calc() function using the toy datasets provided by the package.
-#' # The datasets are georeferenced in wgs84. However, we need a planar system to measure areas.
-#' # In this case, the points and polygons are in the UK so we use the British National Grid.
+#' # Run point_calc() using the packages' dummy data sets.
+#' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+#' # For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
 #'
-#' # This example will return the total points count and ratio
+#' # This example returns the total points count and ratio
 #' outcome1 <- point_calc(
 #'  point_data = points,
 #'  higher_geo_lay = pol_large,
@@ -60,7 +70,7 @@
 #'  outcome1
 #'
 #'
-#'  #' # This example will return the points count and ratio by class
+#'  #' # This example returns the points count and ratio by class
 #' outcome2 <- point_calc(
 #'  point_data = points,
 #'  higher_geo_lay = pol_large,
