@@ -16,34 +16,39 @@ point_calc(
 \arguments{
 \item{point_data}{multipoint object of class \code{sf}, \code{sfc} or \code{sfg}.}
 
-\item{higher_geo_lay}{multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.}
+\item{higher_geo_lay}{multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.}
 
-\item{unique_id_code}{a string; indicating the unique ID column of \code{higher_geo_lay}, in which
-we want to summarise the data.}
+\item{unique_id_code}{a string; indicating a unique ID column of \code{higher_geo_lay},
+used as the summary areas.}
 
-\item{class_col}{a string; indicating the column name of \code{point_data} that contains
-information on the classification of points. It is used when \code{total_points = FALSE}.}
+\item{class_col}{a string; indicating a column name for \code{point_data} containing
+information on a target point classification. This is used when \code{total_points = FALSE}.}
 
-\item{crs}{coordinate reference system: integer with the EPSG code, or character with proj4string.}
+\item{crs}{coordinate reference system: integer with the EPSG code, or character based on proj4string.}
 
-\item{total_points}{logical; do we want to measure the total number of points? if set to \code{FALSE} it returns the
-functio results by each point class; if missing, defaults to \code{TRUE}.}
+\item{total_points}{logical; if the target is to measure the total number of points set to \code{TRUE}, by setting to \code{FALSE}, it returns the
+total number of points by class. If missing, it defaults to \code{TRUE}.}
 }
 \value{
 if \code{total_points = TRUE}:
-A \code{tibble} data frame objects containing three columns:
-the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
-in \code{higher_geo_lay} (Tot_area_sqkm), the total number of point features \code{point_data} (NoPoints),
-and the ratio between the total number of point features \code{point_data} and the the total area of
+A \code{tibble} data frame objects containing four columns is returned:
+\itemize{
+\item the \code{unique_id_code} of \code{higher_geo_lay}
+\item the total area of each polygon
+in \code{higher_geo_lay} (TotalArea)
+\item the total number of point features \code{point_data} (NoPoints),
+and
+\item the ratio between the total number of point features \code{point_data} and the the total area of
 \code{higher_geo_lay} polygon (Ratio).
+}
 
 if \code{total_points = FALSE}:
-A list of three \code{tibble} data frame objects.
+A list of three \code{tibble} data frame objects is returned.
 \itemize{
 \item The object \code{PointsLong} contains three columns:
 the \code{unique_id_code} of \code{higher_geo_lay}, the \code{class_col} of \code{point_data},
 the number of point features \code{point_data} by class (NoPoints), the total area of each polygon
-in \code{higher_geo_lay} (Tot_area_sqkm) and the ratio between the number of point features by class \code{point_data}
+in \code{higher_geo_lay} (TotalArea) and the ratio between the number of point features by class \code{point_data}
 and the the total area of \code{higher_geo_lay} polygon (Ratio).
 \item The object \code{PointsCountWide}:
 Returns the point counts of \code{PointsLong} by \code{unique_id_code} and \code{class_col} in a wide format.
@@ -52,17 +57,23 @@ Returns the ratio of \code{PointsLong} by \code{unique_id_code} and \code{class_
 }
 }
 \description{
-Calculates the number of a multipoint object within a set of polygons, as well as the
-the ratio between the number of points and the total area of a higher geography polygon.
-If there is a clasification of the points, this function is able to return the same summary
-measures for each class.
+Computes three different summary statistics:
+(1) \code{TotalArea} total area of each polygon;
+(2) \code{NoPoints} number of multipoint objects within a given polygon; and,
+(3) \code{Ratio} ratio between \code{NoPoints} and \code{TotalArea} covered within a polygon.
+}
+\details{
+The function requires two sets of data: a layer of geographic polygons, and a layer of points
+
+If points have been categorised into classes, the function can return the same summary
+measures for each class if \code{total_points} = \code{TRUE} by specifying the column that contains the classification in \code{class_col}
 }
 \examples{
-# Run the point_calc() function using the toy datasets provided by the package.
-# The datasets are georeferenced in wgs84. However, we need a planar system to measure areas.
-# In this case, the points and polygons are in the UK so we use the British National Grid.
+# Run point_calc() using the packages' dummy data sets.
+# The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+# For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
 
-# This example will return the total points count and ratio
+# This example returns the total points count and ratio
 outcome1 <- point_calc(
  point_data = points,
  higher_geo_lay = pol_large,
@@ -74,7 +85,7 @@ outcome1 <- point_calc(
  outcome1
 
 
- #' # This example will return the points count and ratio by class
+ #' # This example returns the points count and ratio by class
 outcome2 <- point_calc(
  point_data = points,
  higher_geo_lay = pol_large,
