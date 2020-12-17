@@ -1,9 +1,9 @@
 #' Line data calculation
 #'
 #' Computes three different summary statistics:
-#' (1) `Tot_area_sqkm` total area of each polygon;
+#' (1) `TotalArea` total area of each polygon;
 #' (2) `TotalLength` total length of a multilinestring object within a polygon
-#' (3) `Ratio` ratio between `TotalLength` and `Tot_area_sqkm` i.e. 
+#' (3) `Ratio` ratio between `TotalLength` and `TotalArea` i.e. 
 #' the ratio between the total length and total area of a higher-order geography polygon.
 #'
 #' @param line_layer multilinestring object of class \code{sf}, \code{sfc} or \code{sfg}.
@@ -20,7 +20,7 @@
 #' the \code{unique_id_code} of \code{higher_geo_lay}
 #' 
 #' the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm)
+#' in \code{higher_geo_lay} (TotalArea)
 #' 
 #' the total length of \code{line_layer} features (TotalLength)
 #'
@@ -54,11 +54,11 @@ line_calc <- function(line_layer,
   higher_geo_lay <- sf::st_transform(higher_geo_lay, crs)
 
   # calculate total area of the higher geography layer
-  higher_geo_lay$Tot_area_sqkm <-
-    sf::st_area(higher_geo_lay$geometry) / 1000000
+  higher_geo_lay$TotalArea <-
+    sf::st_area(higher_geo_lay$geometry)
   # convert area of the higher geography layer to numeric too
-  higher_geo_lay$Tot_area_sqkm <-
-    as.numeric(higher_geo_lay$Tot_area_sqkm)
+  higher_geo_lay$TotalArea <-
+    as.numeric(higher_geo_lay$TotalArea)
 
   # assume that the attribute is constant throughout the geometry
   sf::st_agr(line_layer) = "constant"
@@ -83,11 +83,11 @@ line_calc <- function(line_layer,
 
   # to calculate the ratio of length by the total area of the higher geography layer
   combined_data <- dplyr::left_join(LengthByGeo, higher_geo_lay, by = unique_id_code)
-  combined_data$Ratio <- combined_data$TotalLength / combined_data$Tot_area_sqkm
+  combined_data$Ratio <- combined_data$TotalLength / combined_data$TotalArea
 
 
 
-  results <- combined_data[,c(unique_id_code, "Tot_area_sqkm", "TotalLength", "Ratio")]
+  results <- combined_data[,c(unique_id_code, "TotalArea", "TotalLength", "Ratio")]
 
   return(results)
 

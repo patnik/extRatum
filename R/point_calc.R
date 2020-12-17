@@ -1,14 +1,14 @@
 #' Point data calculation
 #'
 #' Computes three different summary statistics: 
-#' (1) total area of each polygon; 
-#' (2) number of multipoint objects within a given polygon; and, 
-#' (3) ratio between the number of points and total area covered within a polygon.
+#' (1) `TotalArea` total area of each polygon; 
+#' (2) `NoPoints` number of multipoint objects within a given polygon; and, 
+#' (3) `Ratio` ratio between `NoPoints` and `TotalArea` covered within a polygon.
 #' 
 #' The function requires two sets of data: a layer of geographic polygons, and a layer of points
 #' 
 #' If points have been categorised into classes, the function can return the same summary
-#' measures for each class if `class_col` = `TRUE`
+#' measures for each class if `total_points` = `TRUE` by specifying the column that contains the classification in `class_col`
 #'
 #' @param point_data multipoint object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
@@ -22,7 +22,7 @@
 #'
 #' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
 #'
-#' @param total_points logical; if the target is to measure the total number of points, set to \code{FALSE}, it returns the
+#' @param total_points logical; if the target is to measure the total number of points set to \code{TRUE}, by setting to \code{FALSE}, it returns the
 #' total number of points by class. If missing, it defaults to \code{TRUE}.
 #'
 #' @return if \code{total_points = TRUE}:
@@ -31,7 +31,7 @@
 #' - the \code{unique_id_code} of \code{higher_geo_lay}
 #'  
 #' - the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm)
+#' in \code{higher_geo_lay} (TotalArea)
 #' 
 #' - the total number of point features \code{point_data} (NoPoints),
 #' and 
@@ -45,7 +45,7 @@
 #' - The object \code{PointsLong} contains three columns:
 #' the \code{unique_id_code} of \code{higher_geo_lay}, the \code{class_col} of \code{point_data},
 #' the number of point features \code{point_data} by class (NoPoints), the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm) and the ratio between the number of point features by class \code{point_data}
+#' in \code{higher_geo_lay} (TotalArea) and the ratio between the number of point features by class \code{point_data}
 #' and the the total area of \code{higher_geo_lay} polygon (Ratio).
 #'
 #' - The object \code{PointsCountWide}:
@@ -112,11 +112,11 @@ point_calc <- function(point_data,
   higher_geo_lay <- sf::st_transform(higher_geo_lay, crs)
 
   # calculate total area of the higher geography layer
-  higher_geo_lay$Tot_area_sqkm <-
-    sf::st_area(higher_geo_lay$geometry) / 1000000
+  higher_geo_lay$TotalArea <-
+    sf::st_area(higher_geo_lay$geometry)
   # convert area of the higher geography layer to numeric too
-  higher_geo_lay$Tot_area_sqkm <-
-    as.numeric(higher_geo_lay$Tot_area_sqkm)
+  higher_geo_lay$TotalArea <-
+    as.numeric(higher_geo_lay$TotalArea)
 
   # find points within polygons
   points_in_grids <-
@@ -134,9 +134,9 @@ point_calc <- function(point_data,
 
     # to calculate the ratio of points by the total area of the higher geography layer
     combined_data <- dplyr::left_join(points_count, higher_geo_lay, by = unique_id_code)
-    combined_data$Ratio <- combined_data$NoPoints / combined_data$Tot_area_sqkm
+    combined_data$Ratio <- combined_data$NoPoints / combined_data$TotalArea
 
-    result1 <- combined_data[,c(unique_id_code, "Tot_area_sqkm", "NoPoints", "Ratio")]
+    result1 <- combined_data[,c(unique_id_code, "TotalArea", "NoPoints", "Ratio")]
 
     return(result1)
   }
@@ -154,12 +154,12 @@ point_calc <- function(point_data,
     # treat the dataset as dataframe
     sf::st_geometry(higher_geo_lay) <- NULL
 
-    combined_data <- dplyr::left_join(points_count, higher_geo_lay[,c(unique_id_code, "Tot_area_sqkm")], by = unique_id_code)
+    combined_data <- dplyr::left_join(points_count, higher_geo_lay[,c(unique_id_code, "TotalArea")], by = unique_id_code)
 
     points_ratio <- combined_data %>%
-      dplyr::mutate(Ratio = NoPoints  / Tot_area_sqkm)
+      dplyr::mutate(Ratio = NoPoints  / TotalArea)
 
-    points_ratio <- points_ratio[,c(unique_id_code, "Tot_area_sqkm", class_col, "NoPoints", "Ratio")]
+    points_ratio <- points_ratio[,c(unique_id_code, "TotalArea", class_col, "NoPoints", "Ratio")]
 
     # create a subset with the columns needed
     points_ratio_subset <- points_ratio[, c(1,3,5)]
