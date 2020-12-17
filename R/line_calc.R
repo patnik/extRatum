@@ -1,28 +1,36 @@
 #' Line data calculation
 #'
-#' Calculates the total length of a multilinestring object within a set of polygons, as well as the
-#' the ratio between the total length and the total area of a higher geography polygon.
+#' Computes three different summary statistics:
+#' (1) `Tot_area_sqkm` total area of each polygon;
+#' (2) `TotalLength` total length of a multilinestring object within a polygon
+#' (3) `Ratio` ratio between `TotalLength` and `Tot_area_sqkm` i.e. 
+#' the ratio between the total length and total area of a higher-order geography polygon.
 #'
 #' @param line_layer multilinestring object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
 #' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating the unique ID column of \code{higher_geo_lay}, in which
-#' we want to summarise the data.
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' used as the summary areas.
 #'
-#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string.
+#' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
 #'
-#' @return a \code{tibble} data frame object containing three columns:
-#' the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm), the total length of \code{line_layer} features (TotalLength),
-#' and the ratio between the total length of \code{line_layer} and the the total area of
+#' @return a \code{tibble} data frame object containing four columns:
+#' 
+#' the \code{unique_id_code} of \code{higher_geo_lay}
+#' 
+#' the total area of each polygon
+#' in \code{higher_geo_lay} (Tot_area_sqkm)
+#' 
+#' the total length of \code{line_layer} features (TotalLength)
+#'
+#' the ratio between the total length of \code{line_layer} and the the total area of
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
-#' # Run the line_calc() function using the toy datasets provided by the package.
-#' # The datasets are georeferenced in wgs84.
-#' # However, we need a planar system to measure line lengths and areas.
-#' # In this case, the lines and polygons are in the UK so we use the British National Grid.
+#' # Run line_calc() using the packages' dummy data sets.
+#' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+#' # For the examples provided here, points and polygons relate to the United Kingdom so the British National Grid is used.
 #' outcome <- line_calc(
 #'  line_layer = lines,
 #'  higher_geo_lay = pol_large,
