@@ -1,27 +1,38 @@
 #' Areal data calculation
 #'
-#' Calculates the area covered by a multipologon object within a set of polygons, as well as the
-#' the ratio between the area covered by its features and the total area of a higher geography polygon.
+#' Computes three different summary statistics: 
+#' (1) `Tot_area_sqkm` total area of each polygon;
+#' (2) `AreaCovered` area covered by a multipolygon object within a high order polygon; and,
+#' (3) `Ratio` ratio between `AreaCovered` and `Tot_area_sqkm` i.e. 
+#' ratio between an area covered by a given set of features and total area of a higher-order geography polygon.
 #'
-#' @param polygon_layer multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
+#' The function requires two sets of polygon data: high-order and low-order geographic polygons
 #'
-#' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
+#' @param polygon_layer multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param unique_id_code a string; indicating the unique ID column of \code{higher_geo_lay}, in which
-#' we want to summarise the data.
+#' @param higher_geo_lay multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param crs coordinate reference system: integer with the EPSG code, or character with proj4string.
+#' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
+#' used as the summary areas.
 #'
-#' @return a \code{tibble} data frame object containing three columns:
-#' the \code{unique_id_code} of \code{higher_geo_lay}, the total area of each polygon
-#' in \code{higher_geo_lay} (Tot_area_sqkm), the total area covered by \code{polygon_layer} features (AreaCovered),
-#' and the ratio between the total area covered by \code{polygon_layer} and the the total area of
+#' @param crs coordinate reference system: integer with the EPSG code, or character based on proj4string.
+#'
+#' @return a \code{tibble} data frame object containing four columns is returned:
+#' 
+#' - the \code{unique_id_code} of \code{higher_geo_lay}
+#'
+#' - the total area of each polygon
+#' in \code{higher_geo_lay} (Tot_area_sqkm), 
+#' 
+#' - the total area covered by \code{polygon_layer} features (AreaCovered),
+#' 
+#' - the ratio between the total area covered by \code{polygon_layer} and total area of
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
-#' # Run the areal_calc() function using the toy datasets provided by the package.
-#' # The datasets are georeferenced in wgs84. However, we need a planar system to measure areas.
-#' # In this case, the polygons are in the UK so we use the British National Grid.
+#' # Run areal_calc() using the packages' dummy data sets.
+#' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+#' # For the examples provided here, polygons relate to the United Kingdom so the British National Grid is used.
 #' outcome <- areal_calc(
 #'  polygon_layer = pol_small,
 #'  higher_geo_lay = pol_large,

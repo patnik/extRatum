@@ -1,7 +1,9 @@
 #' Point data calculation
 #'
-#' Computes three different summary statistics: (1) total area of each polygon; (2) number of multipoint objects within a given polygon; and, (3)
-#' ratio between the number of points and total area covered within a polygon.
+#' Computes three different summary statistics: 
+#' (1) total area of each polygon; 
+#' (2) number of multipoint objects within a given polygon; and, 
+#' (3) ratio between the number of points and total area covered within a polygon.
 #' 
 #' The function requires two sets of data: a layer of geographic polygons, and a layer of points
 #' 
@@ -10,7 +12,7 @@
 #'
 #' @param point_data multipoint object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
-#' @param higher_geo_lay multipologon object of class \code{sf}, \code{sfc} or \code{sfg}.
+#' @param higher_geo_lay multipolygon object of class \code{sf}, \code{sfc} or \code{sfg}.
 #'
 #' @param unique_id_code a string; indicating a unique ID column of \code{higher_geo_lay}, 
 #' used as the summary areas.
