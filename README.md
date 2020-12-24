@@ -31,3 +31,22 @@ To extract `extRatum` citation, type the following code.
 ```{r, eval = FALSE}
 citation('extRatum')
 ```
+
+```
+## 
+## To cite package 'extRatum' in publications use:
+## 
+##   Nikos Patias and Francisco Rowe (2020). extRatum: Summary Statistics
+##   for Geospatial Features. R package version 1.0.0.
+##   https://CRAN.R-project.org/package=extRatum
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {extRatum: Summary Statistics for Geospatial Features},
+##     author = {Nikos Patias and Francisco Rowe},
+##     year = {2020},
+##     note = {R package version 1.0.0},
+##     url = {https://CRAN.R-project.org/package=extRatum},
+##   }
+```
