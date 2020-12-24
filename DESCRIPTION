@@ -1,11 +1,11 @@
 Package: extRatum
-Title: Built Environment Indicators
-Version: 0.0.0.9000
+Title: Summary Statistics for Geospatial Features
+Version: 1.0.1
 Authors@R: c(
 	person("Nikos", "Patias", email = "n.patias@liverpool.ac.uk", role = c("aut","cre"), comment = c(ORCID = "0000-0002-6542-2330")),
 	person("Francisco", "Rowe", email = "fcorowe@liverpool.ac.uk", role = ("aut"))
 	)
-Description: The purpose of this package is to provide summary statistics of local geospatial features within a given geographic area. 
+Description: Provides summary statistics of local geospatial features within a given geographic area. 
 	It does so by calculating the area covered by a target geospatial feature (i.e. buildings, parks, lakes, etc.). 
 	The geospatial features can be of any type of geospatial data, including point, polygon or line data.
 License: MIT + file LICENSE

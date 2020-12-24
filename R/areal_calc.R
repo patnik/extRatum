@@ -30,18 +30,17 @@
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
-#' # Run areal_calc() using the packages' dummy data sets.
+#' #' # Run areal_calc() using the packages' dummy data sets.
 #' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
 #' # For the examples provided here, points and polygons relate to the United Kingdom.
 #' # So the British National Grid is used.
-#' outcome <- areal_calc(
-#'  polygon_layer = pol_small,
-#'  higher_geo_lay = pol_large,
-#'  unique_id_code = "large_pol_",
-#'  crs = "epsg:27700")
 #'
-#'  # print the outcome
-#'  outcome
+#' ## Not run:
+#' outcome <- areal_calc(polygon_layer = pol_small,
+#' higher_geo_lay = pol_large,
+#' unique_id_code = "large_pol_",
+#' crs = "epsg:27700")
+#' ## End(Not run)
 #'
 #'
 #' @importFrom dplyr "%>%"

@@ -74,6 +74,7 @@ measures for each class if \code{total_points} = \code{FALSE} by specifying the 
 # For the examples provided here, points and polygons relate to the United Kingdom.
 # So the British National Grid is used.
 
+## Not run:
 # This example returns the total points count and ratio
 outcome1 <- point_calc(
  point_data = points,
@@ -82,8 +83,6 @@ outcome1 <- point_calc(
  crs = "epsg:27700",
  total_points = TRUE)
 
- # print the outcome
- outcome1
 
 
  #' # This example returns the points count and ratio by class
@@ -94,15 +93,7 @@ outcome2 <- point_calc(
  class_col = "class_name",
  crs = "epsg:27700",
  total_points = FALSE)
-
- # print the outcome in a long format
- outcome2$PointsLong
-
- # print the point count by class in a wide format
- outcome2$PointsCountWide
-
- # print the point ratio by class in a wide format
- outcome2$PointsRatioWide
+## End(Not run)
 
 
 }

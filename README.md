@@ -24,9 +24,10 @@ the development version of extRatum from GitHub.
 # install.packages("devtools")
 devtools::install_github("patnik/extRatum")
 ```
+## Citation
 
-## Usage
+To extract `extRatum` citation, type the following code.
 
-Following this [link](https://github.com/patnik/extRatum_examples) you can access two example notebooks that demonstrate functionalities of the package.
-
-
+```{r, eval = FALSE}
+citation('extRatum')
+```

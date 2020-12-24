@@ -33,14 +33,13 @@
 #' # For the examples provided here, points and polygons relate to the United Kingdom.
 #' # So the British National Grid is used.
 #'
+#' ## Not run:
 #' outcome <- line_calc(
 #'  line_layer = lines,
 #'  higher_geo_lay = pol_large,
 #'  unique_id_code = "large_pol_",
 #'  crs = "epsg:27700")
-#'
-#'  # print the outcome
-#'  outcome
+#' ## End(Not run)
 #'
 #' @importFrom dplyr "%>%"
 #'
