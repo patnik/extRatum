@@ -1,6 +1,6 @@
 Package: extRatum
 Title: Summary Statistics for Geospatial Features
-Version: 1.0.1
+Version: 1.0.3
 Authors@R: c(
 	person("Nikos", "Patias", email = "n.patias@liverpool.ac.uk", role = c("aut","cre"), comment = c(ORCID = "0000-0002-6542-2330")),
 	person("Francisco", "Rowe", email = "fcorowe@liverpool.ac.uk", role = ("aut"))
@@ -14,8 +14,10 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Date/Publication: 2020-09-30 08:57:53 UTC
+SystemRequirements: C++11, GDAL (>= 2.0.1), GEOS (>= 3.4.0), PROJ (>= 4.8.0)
+Date/Publication: 2020-01-13 03:03:00 UTC
 Imports: 
     sf (>= 0.9.5),
     dplyr (>= 1.0.0),
     tidyr (>= 1.1.0)
+    

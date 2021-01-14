@@ -69,30 +69,30 @@ If points have been categorised into classes, the function can return the same s
 measures for each class if \code{total_points} = \code{FALSE} by specifying the column that contains the classification in \code{class_col}
 }
 \examples{
-# Run point_calc() using the packages' dummy data sets.
-# The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-# For the examples provided here, points and polygons relate to the United Kingdom.
-# So the British National Grid is used.
+## Run point_calc() using the packages' dummy data sets.
+## The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+## For the examples provided here, points and polygons relate to the United Kingdom.
+## So the British National Grid is used.
 
 ## Not run:
-# This example returns the total points count and ratio
-outcome1 <- point_calc(
- point_data = points,
- higher_geo_lay = pol_large,
- unique_id_code = "large_pol_",
- crs = "epsg:27700",
- total_points = TRUE)
+## This example returns the total points count and ratio
+# outcome1 <- point_calc(
+# point_data = points,
+# higher_geo_lay = pol_large,
+# unique_id_code = "large_pol_",
+# crs = "epsg:27700",
+# total_points = TRUE)
 
 
 
- #' # This example returns the points count and ratio by class
-outcome2 <- point_calc(
- point_data = points,
- higher_geo_lay = pol_large,
- unique_id_code = "large_pol_",
- class_col = "class_name",
- crs = "epsg:27700",
- total_points = FALSE)
+## This example returns the points count and ratio by class
+# outcome2 <- point_calc(
+# point_data = points,
+# higher_geo_lay = pol_large,
+# unique_id_code = "large_pol_",
+# class_col = "class_name",
+# crs = "epsg:27700",
+# total_points = FALSE)
 ## End(Not run)
 
 

@@ -28,17 +28,17 @@
 #' \code{higher_geo_lay} polygon (Ratio).
 #'
 #' @examples
-#' # Run line_calc() using the packages' dummy data sets.
-#' # The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
-#' # For the examples provided here, points and polygons relate to the United Kingdom.
-#' # So the British National Grid is used.
+#' ## Run line_calc() using the packages' dummy data sets.
+#' ## The data sets are georeferenced on wgs84. However, a planar system is used to measure areas.
+#' ## For the examples provided here, points and polygons relate to the United Kingdom.
+#' ## So the British National Grid is used.
 #'
 #' ## Not run:
-#' outcome <- line_calc(
-#'  line_layer = lines,
-#'  higher_geo_lay = pol_large,
-#'  unique_id_code = "large_pol_",
-#'  crs = "epsg:27700")
+#' #outcome <- line_calc(
+#' # line_layer = lines,
+#' # higher_geo_lay = pol_large,
+#' # unique_id_code = "large_pol_",
+#' # crs = "epsg:27700")
 #' ## End(Not run)
 #'
 #' @importFrom dplyr "%>%"
