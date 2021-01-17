@@ -1,6 +1,6 @@
 Package: extRatum
 Title: Summary Statistics for Geospatial Features
-Version: 1.0.3
+Version: 1.0.4
 Authors@R: c(
 	person("Nikos", "Patias", email = "n.patias@liverpool.ac.uk", role = c("aut","cre"), comment = c(ORCID = "0000-0002-6542-2330")),
 	person("Francisco", "Rowe", email = "fcorowe@liverpool.ac.uk", role = ("aut"))
