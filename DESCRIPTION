@@ -9,7 +9,7 @@ Description: Provides summary statistics of local geospatial features within a g
 	It does so by calculating the area covered by a target geospatial feature (i.e. buildings, parks, lakes, etc.). 
 	The geospatial features can be of any type of geospatial data, including point, polygon or line data.
 License: MIT + file LICENSE
-Depends: R (>= 4.0.0)
+Depends: R (>= 3.3.0)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
