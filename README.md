@@ -49,8 +49,8 @@ citation('extRatum')
 ## 
 ## To cite package 'extRatum' in publications use:
 ## 
-##   Nikos Patias and Francisco Rowe (2020). extRatum: Summary Statistics
-##   for Geospatial Features. R package version 1.0.0.
+##   Nikos Patias and Francisco Rowe (2021). extRatum: Summary Statistics
+##   for Geospatial Features. R package version 1.0.4.
 ##   https://CRAN.R-project.org/package=extRatum
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -58,8 +58,8 @@ citation('extRatum')
 ##   @Manual{,
 ##     title = {extRatum: Summary Statistics for Geospatial Features},
 ##     author = {Nikos Patias and Francisco Rowe},
-##     year = {2020},
-##     note = {R package version 1.0.0},
+##     year = {2021},
+##     note = {R package version 1.0.4},
 ##     url = {https://CRAN.R-project.org/package=extRatum},
 ##   }
 ```
