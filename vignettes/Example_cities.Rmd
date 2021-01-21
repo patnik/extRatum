@@ -1,0 +1,286 @@
+---
+title: "Built Environment example"
+author: "Nikos Patias"
+date: "21/01/2021"
+output: 
+    pdf_document :
+      latex_engine : xelatex
+    html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Built environment statistical indicators
+
+This notebook demonstrates the use of `extRatum` package drawing on *OpenStreetMap* data.
+`extRatum` provides summary statistics of local geospatial features within a given geographic area. It does so by calculating the area covered by a target geospatial feature (i.e. buildings, parks, lakes, etc.). The geospatial features can be of any geospatial data type, including point, polygon or line data.
+
+In this example, we focus on built environment characteristics.
+
+We make use of OpenStreetMap data and calculate point-, polygon- and line-based data features. The reference layer is the Lower Layer Super Output Area (LSOA) boundaries for the city of Liverpool in the United Kingdom.
+
+```{r}
+library(extRatum)
+library(sf)
+library(dplyr)
+library(tmap)
+library(osmdata)
+```
+
+## Read boundaries
+
+First, we read in the LSOA boundaries for Liverpool. The data downloaded from CDRC website: https://data.cdrc.ac.uk/
+
+```{r}
+# 1. Read in the FUA grids
+LSOAs <- st_read("layers/E08000012.shp")
+
+```
+Because the area of interest is in the UK, we select the British National Grid as a planar coordinate system of reference.
+
+```{r}
+BNG = "epsg:27700"
+```
+
+
+## Point data metrics
+
+Here, we illustrate the use of `extRatum` with point data. 
+
+We create a simple query to download point data representing shops in Liverpool.
+```{r}
+q <- getbb("Liverpool") %>%
+  opq() %>%
+  add_osm_feature(key = "shop")
+
+shops <- osmdata_sf(q)
+```
+
+And plot them.
+
+```{r}
+#tmap_mode("view") #use this code for creating an interactive map
+tmap_mode("plot")
+
+# show the points and grids
+tm_shape(LSOAs) +
+  tm_borders() +
+  tm_shape(shops$osm_points) +
+  tm_dots()
+```
+
+
+Then we calculate the number of points in each polygon using the `point_calc()` function. Note that we have to pass a planar coordinate system in all our functions. Here we are using the British National Grid. 
+The output of this function will be a dataframe containing:
+
+- LSOA code;
+- total area in sqm of each LSOA;
+- number of points (i.e. shops) in each LSOA; and
+- ratio of points to the total LSOA area (or in other words the number of points by sqm). In this way, we have a relative measure that can be compared across all LSOAs and is independent of their geographical area.
+
+Note that we have used the argument `total_points = TRUE` which returns the total number of points without differentiating between different shop types.
+
+```{r}
+
+Shops_total <- point_calc(
+  point_data = shops$osm_points,
+  higher_geo_lay = LSOAs,
+  unique_id_code = 'lsoa11cd',
+  crs = BNG,
+  total_points = TRUE
+  )
+
+# inspect the results
+head(Shops_total)
+
+
+```
+
+In some cases, we want to know the split between different types of points. To that end, we can change the `total_points = FALSE` and specify the column name that includes the classification (see `class_col`).
+
+```{r}
+
+Shops_class <- point_calc(
+  point_data = shops$osm_points,
+  higher_geo_lay = LSOAs,
+  unique_id_code = 'lsoa11cd',
+  class_col = 'shop',
+  crs = BNG,
+  total_points = FALSE
+  )
+
+
+
+```
+
+The output of this function will be a list of three dataframes.
+
+1. A dataframe in long format reporting: 
+
+- LSOA codes;
+- total area in sqm of each LSOA;
+- classification of the points within each LSOA;
+- number of points in each class (i.e. bakery, beauty) in each LSOA; and
+- ratio of points in each class to the total LSOA area (or in other words the number of points by sqm).
+
+
+```{r}
+head(Shops_class$PointsLong)
+
+```
+
+2. A dataframe in wide format reporting: 
+
+- LSOA codes;
+- number of points in each class (i.e. bakery, beauty) in each LSOA.
+
+```{r}
+head(Shops_class$PointsCountWide)
+
+```
+
+3. A dataframe in wide format reporting: 
+
+- LSOA codes;
+- ratio of points in each class to the total LSOA area (or in other words the number of points by sqm).
+
+```{r}
+head(Shops_class$PointsRatioWide)
+
+```
+
+Finally we can map the results to show the density of shops in the city of Liverpool at the LSOA level. 
+```{r}
+# attach the information calculate using extRatum to the LSOA boundaries
+Liv_shops_geo <- dplyr::left_join(LSOAs, Shops_total, by = "lsoa11cd")
+
+tm_shape(Liv_shops_geo) +
+  tm_fill("NoPoints", style = "fisher", palette = "Reds", alpha = 0.6)
+```
+
+
+## Polygon data analysis
+Next, we illustrate the use of `extRatum` with polygon data.
+
+We create a query to download building footprints for the city of Liverpool using *OpenStreetMap* data.
+```{r}
+q2 <- getbb("Liverpool", limit = 100) %>%
+  opq() %>%
+  add_osm_feature(key = "building")
+
+buildings <- osmdata_sf(q2)
+
+```
+
+We can then subset the buildings that are classified as retail. 
+
+```{r}
+retail_buildings <- subset(buildings$osm_polygons, building=="retail")
+
+```
+
+
+Then, we run the function that calculates the area in sqm covered by retail buildings in each LSOA using `areal_calc()` function.
+
+```{r}
+Liv_retail <- areal_calc(
+  polygon_layer = retail_buildings,
+  higher_geo_lay = LSOAs,
+  unique_id_code = 'lsoa11cd',
+  crs = BNG
+  )
+
+```
+
+The output of this function will be a dataframe containing:
+
+- LSOA codes;
+- total area in sqm of each LSOA;
+- area in sqm covered by the geospatial feature we have selected in each LSOA; and
+- ratio of geospatial feature area to the total LSOA area (or in other words the area covered by the geospatial feature by sqm).
+
+Given that everything is measured in sqm, the ratio represents what is the % of area covered by retail buildings by sqm. In this way, we have a relative measure that can be compared across all LSOAs and is independent of their size.
+
+We can also transform the calculated values in sqkm by dividing the value in sqm by 1,000,000. This can be done as follows.
+
+```{r}
+Liv_retail$AreaCovered_sqkm <- Liv_retail$AreaCovered /1000000
+
+head(Liv_retail)
+```
+
+Finally, we can plot the results, showing the total area covered by retail buildings in each LSOA in Liverpool.
+Note that OSM data on retail buildings are not complete for the city of Liverpool. Thus, we see too many LSOAs with missing data. 
+
+```{r}
+Liv_retail_geo <- dplyr::left_join(LSOAs, Liv_retail, by = "lsoa11cd")
+
+tm_shape(Liv_retail_geo) +
+  tm_fill("AreaCovered", style = "fisher", palette = "Reds", alpha = 0.6) 
+```
+
+
+## Line data analysis
+
+Now, we illustrate the use of `extRatum` with line data.
+
+We create a query to download highway lines for the city of Liverpool using OpenStreetMap data.
+
+```{r}
+q3 <- getbb("Liverpool") %>%
+  opq() %>%
+  add_osm_feature(key = "highway")
+
+highways <- osmdata_sf(q3)
+```
+
+We can then create subsets of the dataset such as pathways for pedestrian use.
+
+```{r}
+pedestrian <- subset(highways$osm_lines, highway == "pedestrian")
+```
+
+Then we can calculate the total length of pedestrian pathways routes by LSOA using `line_calc()` function.
+
+```{r}
+Liv_footways <- line_calc(
+  line_layer = pedestrian,
+  higher_geo_lay = LSOAs,
+  unique_id_code = 'lsoa11cd',
+  crs = BNG
+  )
+
+
+```
+
+The output of this function will be a dataframe containing:
+
+- LSOA codes;
+- total area in sqm of each LSOA;
+- total line length in metres by the geospatial feature we have selected in each LSOA; and
+- ratio of geospatial feature length to the total LSOA area (or in other words the length of the geospatial feature by sqm). In this way, we have a relative measure that can be compared across all LSOAs and is independent of their size.
+
+```{r}
+head(Liv_footways)
+```
+
+
+Finally, we can plot the results, showing the total length of pedestrian pathways in each LSOA in Liverpool.
+Note that the majority is around Liverpool city centre where we see darker colours. 
+
+```{r}
+Liv_footways_geo <- left_join(LSOAs, Liv_footways, by = "lsoa11cd")
+
+
+tm_shape(Liv_footways_geo) +
+  tm_fill("TotalLength", style = "fisher", palette = "Reds", alpha = 0.6)
+```
+
+
+
+
+
+
+
