@@ -1,5 +1,5 @@
-<p align="center"> <img width="250" src="man/figures/sticker.png"> </p>
-
+extRatum <img width="150" src="man/figures/sticker.png" align="right" />
+=====================================================
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/extRatum)](https://cran.r-project.org/package=extRatum)
 ![RStudio CRAN
