@@ -1,0 +1,8 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  Example_cities: Example_cities.html
+  Example_lakes: Example_lakes.html
+last_built: 2021-01-21T15:48Z
+
